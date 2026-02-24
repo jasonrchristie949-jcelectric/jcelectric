@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JC Electric — Licensed & Insured Electrical Contractor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              950: '#060E1C',
+              900: '#0B1628',
+              800: '#0F1F3D',
+              700: '#152A52',
+              600: '#1A3567',
+              500: '#1E3F7A',
+            },
+            gold: {
+              300: '#FFD166',
+              400: '#FFC033',
+              500: '#F5A800',
+              600: '#D98E00',
+              700: '#B87700',
+            },
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0B1628; color: #e2e8f0; }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .nav-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(6, 14, 28, 0.88);
+      border-bottom: 1px solid rgba(245, 168, 0, 0.15);
+    }
+
+    .nav-link {
+      position: relative;
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5A800;
+      transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-link:hover { color: #F5A800; }
+    .nav-link:hover::after { width: 100%; }
+
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 90% 70% at 65% 35%, rgba(30, 63, 122, 0.7) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 50% at 15% 75%, rgba(245, 168, 0, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(245, 168, 0, 0.06) 0%, transparent 50%),
+        linear-gradient(160deg, #04090F 0%, #080E1C 35%, #0D1A35 100%);
+    }
+
+    /* Hero glow behind headline */
+    .headline-glow {
+      position: relative;
+    }
+    .headline-glow::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: -10%;
+      width: 120%;
+      height: 120%;
+      transform: translateY(-50%);
+      background: radial-gradient(ellipse 80% 60% at 40% 50%, rgba(245,168,0,0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Animated gold pulse ring on hero badge */
+    @keyframes ringPulse {
+      0% { transform: scale(1); opacity: 0.6; }
+      70% { transform: scale(1.6); opacity: 0; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    .pulse-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(245,168,0,0.5);
+      animation: ringPulse 2s ease-out infinite;
+    }
+
+    .gold-line {
+      display: inline-block;
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, #F5A800, #FFD166);
+      border-radius: 2px;
+    }
+
+    .service-card {
+      background: linear-gradient(145deg, rgba(15, 31, 61, 0.9), rgba(11, 22, 40, 0.95));
+      border: 1px solid rgba(245, 168, 0, 0.12);
+      border-radius: 12px;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3), 0 1px 0 rgba(245,168,0,0.05) inset;
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(245, 168, 0, 0.45);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(245,168,0,0.15), 0 0 32px rgba(245,168,0,0.08);
+    }
+
+    .icon-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(245, 168, 0, 0.1);
+      border: 1px solid rgba(245, 168, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+    .service-card:hover .icon-ring {
+      background: rgba(245, 168, 0, 0.18);
+      border-color: rgba(245, 168, 0, 0.5);
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, rgba(21, 42, 82, 0.6), rgba(11, 22, 40, 0.8));
+      border: 1px solid rgba(245, 168, 0, 0.15);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #F5A800, #D98E00);
+      color: #060E1C;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+      box-shadow: 0 4px 16px rgba(245, 168, 0, 0.3), 0 1px 0 rgba(255,255,255,0.15) inset;
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 28px rgba(245, 168, 0, 0.45);
+    }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary:focus-visible { outline: 2px solid #F5A800; outline-offset: 3px; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #F5A800;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 32px;
+      border-radius: 6px;
+      border: 1.5px solid rgba(245, 168, 0, 0.5);
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-outline:hover {
+      transform: translateY(-2px);
+      border-color: #F5A800;
+      background: rgba(245, 168, 0, 0.08);
+      box-shadow: 0 4px 16px rgba(245, 168, 0, 0.15);
+    }
+    .btn-outline:active { transform: scale(0.98); }
+    .btn-outline:focus-visible { outline: 2px solid #F5A800; outline-offset: 3px; }
+
+    /* Card book link */
+    .book-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #F5A800;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: gap 0.2s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease;
+      margin-top: auto;
+      padding-top: 20px;
+    }
+    .book-link:hover { gap: 10px; opacity: 0.85; }
+    .book-link:focus-visible { outline: 2px solid #F5A800; outline-offset: 2px; border-radius: 2px; }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .section-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,168,0,0.2), transparent);
+    }
+
+    .why-card {
+      background: rgba(15, 31, 61, 0.5);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .why-card:hover {
+      border-color: rgba(245, 168, 0, 0.25);
+      background: rgba(15, 31, 61, 0.75);
+    }
+
+    .testimonial-card {
+      background: linear-gradient(145deg, rgba(15,31,61,0.7), rgba(11,22,40,0.9));
+      border: 1px solid rgba(245,168,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    }
+
+    .contact-bg {
+      background:
+        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(26, 53, 103, 0.4) 0%, transparent 70%),
+        linear-gradient(180deg, #060E1C 0%, #0B1628 100%);
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(11, 22, 40, 0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+    .form-input::placeholder { color: #475569; }
+    .form-input:focus {
+      border-color: rgba(245, 168, 0, 0.5);
+      box-shadow: 0 0 0 3px rgba(245, 168, 0, 0.1);
+    }
+
+    /* Gallery */
+    .work-card {
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    }
+    .work-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,168,0,0.2);
+    }
+    .work-card img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .work-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6,14,28,0.9) 0%, rgba(6,14,28,0.2) 60%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .work-card:hover .overlay { opacity: 1; }
+    .work-card .tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(245,168,0,0.15);
+      border: 1px solid rgba(245,168,0,0.4);
+      color: #F5A800;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      backdrop-filter: blur(8px);
+    }
+
+    /* How it works steps */
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F5A800, #D98E00);
+      color: #060E1C;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.375rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(245,168,0,0.35);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #060E1C; }
+    ::-webkit-scrollbar-thumb { background: rgba(245,168,0,0.3); border-radius: 3px; }
+
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: block; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .delay-1 { animation-delay: 0.15s; }
+    .delay-2 { animation-delay: 0.3s; }
+    .delay-3 { animation-delay: 0.45s; }
+    .delay-4 { animation-delay: 0.6s; }
+
+    @keyframes boltPulse {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(245,168,0,0.5)); }
+      50% { filter: drop-shadow(0 0 14px rgba(245,168,0,0.9)); }
+    }
+    .bolt-pulse { animation: boltPulse 2.5s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════════ -->
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 nav-blur">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between" style="height:72px;">
+    <a href="#" class="flex-shrink-0">
+      <img src="brand /JC_Electric_Logo.png" alt="JC Electric" class="h-10 w-auto" />
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#work" class="nav-link">Our Work</a>
+      <a href="#why-us" class="nav-link">About</a>
+      <a href="#testimonials" class="nav-link">Reviews</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="hidden md:flex items-center gap-3">
+      <a href="tel:+19492965063" class="flex items-center gap-2 font-semibold text-sm transition-colors duration-200" style="color:#F5A800;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+        (949) 296-5063
+      </a>
+      <a href="#contact" class="btn-primary" style="padding: 10px 22px; font-size:0.875rem;">Book a Service</a>
+    </div>
+
+    <button id="menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
+      <span class="block w-6 h-0.5 bg-slate-300"></span>
+      <span class="block w-6 h-0.5 bg-slate-300"></span>
+      <span class="block w-4 h-0.5 bg-slate-300"></span>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="md:hidden border-t border-white/5">
+    <nav class="flex flex-col px-6 py-4 gap-4">
+      <a href="#services" class="nav-link" onclick="closeMobile()">Services</a>
+      <a href="#work" class="nav-link" onclick="closeMobile()">Our Work</a>
+      <a href="#why-us" class="nav-link" onclick="closeMobile()">About</a>
+      <a href="#testimonials" class="nav-link" onclick="closeMobile()">Reviews</a>
+      <a href="#contact" class="nav-link" onclick="closeMobile()">Contact</a>
+      <a href="#contact" class="btn-primary mt-2" onclick="closeMobile()">Book a Service</a>
+    </nav>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section class="hero-bg relative overflow-hidden" style="padding-top: 72px; min-height: 100vh; display:flex; align-items:center;">
+
+  <div class="absolute inset-0 pointer-events-none" style="
+    background-image: linear-gradient(rgba(245,168,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,168,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  "></div>
+
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none" style="opacity:0.07; right:-60px;">
+    <svg width="500" height="500" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 w-full">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+      <!-- Left: Copy -->
+      <div>
+        <div class="fade-up flex items-center gap-3 mb-5">
+          <!-- Live availability badge -->
+          <span class="flex items-center gap-2" style="background:rgba(245,168,0,0.12); border:1px solid rgba(245,168,0,0.3); border-radius:50px; padding:5px 14px;">
+            <span style="position:relative; display:inline-flex; align-items:center; justify-content:center; width:8px; height:8px;">
+              <span class="pulse-ring" style="position:absolute; inset:-3px; border-radius:50%; border:1.5px solid rgba(245,168,0,0.6); animation:ringPulse 2s ease-out infinite;"></span>
+              <span style="width:7px; height:7px; border-radius:50%; background:#F5A800; display:block; box-shadow:0 0 6px rgba(245,168,0,0.8);"></span>
+            </span>
+            <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; font-size:0.8rem;">Now Booking — Orange County</span>
+          </span>
+        </div>
+
+        <div class="fade-up delay-1 headline-glow">
+          <p style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem; margin-bottom:0.75rem;">Licensed & Insured Electrical Contractor</p>
+          <h1 class="section-title text-white" style="font-size: clamp(3rem, 6.5vw, 5rem); margin-bottom: 1.25rem; text-shadow: 0 2px 40px rgba(0,0,0,0.4);">
+            Powering Homes &<br />
+            <span style="color:#F5A800; text-shadow: 0 0 40px rgba(245,168,0,0.25);">Businesses</span> With<br />
+            Expert Electrical Work
+          </h1>
+        </div>
+
+        <p class="fade-up delay-2 text-slate-400 mb-8" style="font-size:1.0625rem; line-height:1.75; max-width:520px;">
+          JC Electric delivers safe, reliable, and code-compliant electrical solutions for residential and commercial clients. From panel upgrades to full buildouts — we get it done right the first time.
+        </p>
+
+        <div class="fade-up delay-3 flex flex-wrap gap-4 mb-10">
+          <a href="#contact" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Book a Service
+          </a>
+          <a href="#services" class="btn-outline">See All Services</a>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="fade-up delay-4 flex flex-wrap gap-6">
+          <div class="flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="text-slate-400 text-sm">Fully Licensed</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="text-slate-400 text-sm">Insured & Bonded</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            <span class="text-slate-400 text-sm">Free Estimates</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: hero image -->
+      <div class="hidden lg:block relative">
+        <div class="relative" style="height: 480px;">
+          <!-- Electrical illustration -->
+          <div class="absolute inset-0 rounded-2xl overflow-hidden" style="box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,168,0,0.2);">
+            <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;" aria-label="JC Electric powers homes and businesses">
+              <defs>
+                <filter id="f-gold" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="7" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="f-gold-lg" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="18" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="f-glow-sm" x="-60%" y="-60%" width="220%" height="220%">
+                  <feGaussianBlur stdDeviation="4" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <filter id="f-win" x="-100%" y="-100%" width="300%" height="300%">
+                  <feGaussianBlur stdDeviation="3" result="b"/>
+                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+                <radialGradient id="rg-bg" cx="50%" cy="42%" r="60%">
+                  <stop offset="0%" stop-color="#0C1D38"/>
+                  <stop offset="55%" stop-color="#071120"/>
+                  <stop offset="100%" stop-color="#030810"/>
+                </radialGradient>
+                <radialGradient id="rg-center" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#F5A800" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#F5A800" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="rg-house" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#F5A800" stop-opacity="0.18"/>
+                  <stop offset="100%" stop-color="#F5A800" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="rg-bldg" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#F5A800" stop-opacity="0.18"/>
+                  <stop offset="100%" stop-color="#F5A800" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="lg-fade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="50%" stop-color="#030810" stop-opacity="0"/>
+                  <stop offset="100%" stop-color="#030810" stop-opacity="0.9"/>
+                </linearGradient>
+                <style>
+                  /* Power flow: animated dashes moving away from center */
+                  .pf-left  { stroke-dasharray:10 8; animation: flowLeft  1.5s linear infinite; }
+                  .pf-right { stroke-dasharray:10 8; animation: flowRight 1.5s linear infinite; }
+                  /* Bolt flicker */
+                  .bolt-flicker { animation: bFlicker 3s ease-in-out infinite; }
+                  /* Diamond ring pulse */
+                  .ring-pulse { animation: rPulse 2.2s ease-in-out infinite; }
+                  /* Lit windows */
+                  .win-glow { animation: winPulse 2.5s ease-in-out infinite; }
+                  .win-glow2 { animation: winPulse 2.5s ease-in-out infinite 0.6s; }
+                  .win-glow3 { animation: winPulse 2.5s ease-in-out infinite 1.2s; }
+                  /* Sparks */
+                  .sp  { animation: spFade 1.8s ease-in-out infinite; }
+                  .sp2 { animation: spFade 1.8s ease-in-out infinite 0.5s; }
+                  .sp3 { animation: spFade 1.8s ease-in-out infinite 1s; }
+                  @keyframes flowLeft  { to { stroke-dashoffset:  72; } }
+                  @keyframes flowRight { to { stroke-dashoffset: -72; } }
+                  @keyframes bFlicker {
+                    0%,100%{opacity:1;} 8%{opacity:.8;} 9%{opacity:1;}
+                    50%{opacity:.92;} 51%{opacity:.45;} 52%{opacity:1;}
+                  }
+                  @keyframes rPulse {
+                    0%,100%{opacity:.55; transform:scale(1);}
+                    50%{opacity:1; transform:scale(1.04);}
+                  }
+                  @keyframes winPulse {
+                    0%,100%{opacity:.6;} 50%{opacity:1;}
+                  }
+                  @keyframes spFade {
+                    0%,100%{opacity:0; r:1;} 45%,55%{opacity:1; r:3;}
+                  }
+                </style>
+              </defs>
+
+              <!-- Background -->
+              <rect width="640" height="480" fill="url(#rg-bg)"/>
+
+              <!-- Subtle dot grid -->
+              <g opacity="0.07">
+                <pattern id="dotgrid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <circle cx="20" cy="20" r="1" fill="#4A7BB5"/>
+                </pattern>
+                <rect width="640" height="480" fill="url(#dotgrid)"/>
+              </g>
+
+              <!-- ── POWER LINES (drawn first, behind buildings) ─────── -->
+              <!-- Static base lines -->
+              <g fill="none" stroke="#1A3D70" stroke-width="2.5">
+                <!-- Left: diamond → elbow → house roof -->
+                <path d="M222,185 L150,185 L90,275"/>
+                <!-- Right: diamond → elbow → building top -->
+                <path d="M418,185 L490,185 L552,252"/>
+              </g>
+
+              <!-- Animated power-flow overlay -->
+              <g fill="none" stroke="#F5A800" stroke-width="2.5" opacity="0.75">
+                <path class="pf-left"  d="M222,185 L150,185 L90,275"/>
+                <path class="pf-right" d="M418,185 L490,185 L552,252"/>
+              </g>
+
+              <!-- Elbow joint dots -->
+              <circle cx="150" cy="185" r="4" fill="#F5A800" opacity="0.6"/>
+              <circle cx="490" cy="185" r="4" fill="#F5A800" opacity="0.6"/>
+
+              <!-- ── HOUSE (Residential) ──────────────────────────────── -->
+              <!-- Glow halo when powered -->
+              <ellipse cx="90" cy="330" rx="70" ry="55" fill="url(#rg-house)" class="win-glow"/>
+
+              <!-- House body -->
+              <polygon points="90,268 50,308 130,308" fill="#0D2040" stroke="#1E4A8A" stroke-width="1.5"/>
+              <rect x="55" y="308" width="70" height="58" rx="2" fill="#0D2040" stroke="#1E4A8A" stroke-width="1.5"/>
+              <!-- Door -->
+              <rect x="78" y="333" width="24" height="33" rx="2" fill="#091528"/>
+              <!-- Lit windows -->
+              <rect class="win-glow"  x="59" y="315" width="18" height="14" rx="1" fill="#F5A800" opacity="0.8" filter="url(#f-win)"/>
+              <rect class="win-glow2" x="83" y="315" width="18" height="14" rx="1" fill="#F5A800" opacity="0.8" filter="url(#f-win)"/>
+              <rect class="win-glow3" x="107" y="315" width="18" height="14" rx="1" fill="#F5A800" opacity="0.8" filter="url(#f-win)"/>
+              <!-- Chimney -->
+              <rect x="108" y="277" width="10" height="18" fill="#0D2040" stroke="#1E4A8A" stroke-width="1"/>
+
+              <!-- "Residential" label -->
+              <text x="90" y="382" text-anchor="middle" font-family="'Barlow Condensed',sans-serif"
+                font-size="11" font-weight="700" fill="#F5A800" letter-spacing="2" opacity="0.9">RESIDENTIAL</text>
+
+              <!-- Connection node at house -->
+              <circle cx="90" cy="275" r="5" fill="#F5A800" filter="url(#f-glow-sm)" class="win-glow"/>
+
+              <!-- ── BUILDING (Commercial) ────────────────────────────── -->
+              <ellipse cx="552" cy="315" rx="65" ry="55" fill="url(#rg-bldg)" class="win-glow2"/>
+
+              <!-- Main tower -->
+              <rect x="520" y="248" width="65" height="118" rx="2" fill="#0D2040" stroke="#1E4A8A" stroke-width="1.5"/>
+              <!-- Rooftop detail -->
+              <rect x="515" y="240" width="75" height="10" rx="1" fill="#122540" stroke="#1E4A8A" stroke-width="1"/>
+              <!-- Antenna -->
+              <line x1="552" y1="240" x2="552" y2="222" stroke="#1E4A8A" stroke-width="1.5"/>
+              <circle cx="552" cy="220" r="2.5" fill="#F5A800" class="win-glow3" filter="url(#f-glow-sm)"/>
+              <!-- Door -->
+              <rect x="537" y="333" width="30" height="33" rx="1" fill="#091528"/>
+              <!-- Window grid: 3 cols × 3 rows -->
+              <g filter="url(#f-win)">
+                <rect class="win-glow"  x="524" y="255" width="14" height="10" rx="1" fill="#F5A800" opacity="0.85"/>
+                <rect class="win-glow2" x="543" y="255" width="14" height="10" rx="1" fill="#F5A800" opacity="0.85"/>
+                <rect class="win-glow3" x="562" y="255" width="14" height="10" rx="1" fill="#F5A800" opacity="0.85"/>
+                <rect class="win-glow2" x="524" y="272" width="14" height="10" rx="1" fill="#F5A800" opacity="0.75"/>
+                <rect class="win-glow3" x="543" y="272" width="14" height="10" rx="1" fill="#F5A800" opacity="0.75"/>
+                <rect class="win-glow"  x="562" y="272" width="14" height="10" rx="1" fill="#F5A800" opacity="0.75"/>
+                <rect class="win-glow"  x="524" y="289" width="14" height="10" rx="1" fill="#F5A800" opacity="0.65"/>
+                <rect class="win-glow2" x="543" y="289" width="14" height="10" rx="1" fill="#F5A800" opacity="0.65"/>
+                <rect class="win-glow3" x="562" y="289" width="14" height="10" rx="1" fill="#F5A800" opacity="0.65"/>
+              </g>
+
+              <!-- "Commercial" label -->
+              <text x="552" y="390" text-anchor="middle" font-family="'Barlow Condensed',sans-serif"
+                font-size="11" font-weight="700" fill="#F5A800" letter-spacing="2" opacity="0.9">COMMERCIAL</text>
+
+              <!-- Connection node at building -->
+              <circle cx="552" cy="252" r="5" fill="#F5A800" filter="url(#f-glow-sm)" class="win-glow2"/>
+
+              <!-- ── CENTER GLOW BEHIND LOGO MARK ──────────────────────── -->
+              <ellipse cx="320" cy="185" rx="130" ry="110" fill="url(#rg-center)"/>
+
+              <!-- ── JC ELECTRIC LOGO MARK (diamond + bolt) ─────────────── -->
+              <!-- Outer ring / halo — pulsing -->
+              <polygon class="ring-pulse" fill="none" stroke="#F5A800" stroke-width="1"
+                opacity="0.3"
+                points="320,68 438,185 320,302 202,185"
+                transform-origin="320 185"/>
+
+              <!-- Outer diamond border (matches logo bracket style) -->
+              <polygon fill="none" stroke="#F5A800" stroke-width="2.5"
+                points="320,78 428,185 320,292 212,185"
+                filter="url(#f-gold)"/>
+
+              <!-- Inner diamond fill -->
+              <polygon fill="#060E1C" stroke="#F5A800" stroke-width="1.5"
+                points="320,90 416,185 320,280 224,185"/>
+
+              <!-- Bolt inside diamond — flickers like the logo's bolt -->
+              <g class="bolt-flicker" filter="url(#f-gold-lg)">
+                <!-- Glow halo -->
+                <polygon points="327,108 296,183 320,183 308,262 348,183 322,183 345,108"
+                  fill="#F5A800" opacity="0.18"/>
+                <!-- Main bolt body -->
+                <polygon points="329,112 299,182 322,182 310,258 346,182 324,182 343,112"
+                  fill="#FFD166"/>
+                <!-- Bright center core -->
+                <polygon points="330,120 306,180 323,180 315,242 340,180 326,180 340,120"
+                  fill="#FFFACD" opacity="0.9"/>
+              </g>
+
+              <!-- Spark particles at bolt tip -->
+              <g filter="url(#f-gold)">
+                <circle class="sp"  cx="305" cy="118" r="2.5" fill="#FFD166"/>
+                <circle class="sp2" cx="338" cy="112" r="2" fill="#F5A800"/>
+                <circle class="sp3" cx="320" cy="100" r="2" fill="#FFFACD"/>
+                <circle class="sp2" cx="295" cy="128" r="1.5" fill="#FFD166"/>
+                <circle class="sp"  cx="348" cy="124" r="1.5" fill="#F5A800"/>
+                <line class="sp"  x1="289" y1="112" x2="280" y2="105" stroke="#FFD166" stroke-width="1.5" stroke-linecap="round"/>
+                <line class="sp2" x1="352" y1="110" x2="361" y2="103" stroke="#F5A800" stroke-width="1.5" stroke-linecap="round"/>
+                <line class="sp3" x1="320" y1="96"  x2="320" y2="86"  stroke="#FFFACD" stroke-width="1.5" stroke-linecap="round"/>
+              </g>
+
+              <!-- "JC ELECTRIC" brand text below diamond -->
+              <text x="320" y="308" text-anchor="middle"
+                font-family="'Barlow Condensed',sans-serif" font-size="20" font-weight="800"
+                fill="#F5A800" letter-spacing="4" filter="url(#f-gold)">JC ELECTRIC</text>
+              <text x="320" y="322" text-anchor="middle"
+                font-family="'Barlow Condensed',sans-serif" font-size="9" font-weight="600"
+                fill="#94a3b8" letter-spacing="3.5">ELECTRICAL CONTRACTING</text>
+
+              <!-- ── BOTTOM FADE + CAPTION ──────────────────────────────── -->
+              <rect width="640" height="480" fill="url(#lg-fade)"/>
+
+              <!-- Bottom caption bar -->
+              <rect x="20" y="420" width="600" height="44" rx="8"
+                fill="rgba(6,14,28,0.82)"/>
+              <rect x="20" y="420" width="600" height="44" rx="8"
+                fill="none" stroke="rgba(245,168,0,0.22)" stroke-width="1"/>
+              <polygon points="51,432 44,446 50,446 48,458 58,444 52,444 57,432" fill="#F5A800"/>
+              <text x="70" y="436" font-family="'Barlow Condensed',sans-serif"
+                font-size="13" font-weight="700" fill="white">Powering Orange County — Homes &amp; Businesses</text>
+              <text x="70" y="452" font-family="'Inter',sans-serif"
+                font-size="10" fill="#64748b">Licensed &amp; Insured · Every job completed to code</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS BAR
+════════════════════════════════════════════════════════ -->
+<div style="background: linear-gradient(90deg, #0F1F3D, #152A52, #0F1F3D); border-top: 1px solid rgba(245,168,0,0.15); border-bottom: 1px solid rgba(245,168,0,0.15);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="section-title" style="font-size:2.25rem; color:#F5A800;">500+</p>
+        <p class="text-slate-400 text-sm mt-1">Projects Completed</p>
+      </div>
+      <div>
+        <p class="section-title" style="font-size:2.25rem; color:#F5A800;">100%</p>
+        <p class="text-slate-400 text-sm mt-1">Licensed & Insured</p>
+      </div>
+      <div>
+        <p class="section-title" style="font-size:2.25rem; color:#F5A800;">5★</p>
+        <p class="text-slate-400 text-sm mt-1">Rated by Customers</p>
+      </div>
+      <div>
+        <p class="section-title" style="font-size:2.25rem; color:#F5A800;">Free</p>
+        <p class="text-slate-400 text-sm mt-1">Estimates on Every Job</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════════════════════════ -->
+<section style="background: linear-gradient(180deg, #0F1F3D 0%, #0B1628 100%); padding: 64px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="flex items-center justify-center gap-3 mb-3">
+        <span class="gold-line"></span>
+        <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">Simple Process</span>
+        <span class="gold-line"></span>
+      </div>
+      <h2 class="section-title text-white" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem);">How to Book with JC Electric</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
+      <div class="text-center">
+        <div class="step-num mx-auto mb-4">1</div>
+        <h3 class="section-title text-white text-lg mb-2">Request a Quote</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Fill out our quick form or give us a call. Tell us what you need — we'll respond fast.</p>
+      </div>
+      <!-- Arrow connector (desktop) -->
+      <div class="text-center relative">
+        <div class="hidden sm:block absolute top-6 -left-4 text-gold-500" style="color:#F5A800; font-size:1.5rem;">→</div>
+        <div class="step-num mx-auto mb-4">2</div>
+        <h3 class="section-title text-white text-lg mb-2">We Schedule It</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">We'll lock in a time that works for you, Mon–Fri between 8am and 5pm.</p>
+        <div class="hidden sm:block absolute top-6 -right-4 text-gold-500" style="color:#F5A800; font-size:1.5rem;">→</div>
+      </div>
+      <div class="text-center">
+        <div class="step-num mx-auto mb-4">3</div>
+        <h3 class="section-title text-white text-lg mb-2">Done Right</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">We show up on time, complete the work to code, and leave your space clean.</p>
+      </div>
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="#contact" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Schedule My Service
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SERVICES
+════════════════════════════════════════════════════════ -->
+<section id="services" class="py-24 lg:py-32" style="background: linear-gradient(180deg, #0B1628 0%, #060E1C 100%);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="gold-line"></span>
+        <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">What We Do</span>
+        <span class="gold-line"></span>
+      </div>
+      <h2 class="section-title text-white" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom:1rem;">Our Electrical Services</h2>
+      <p class="text-slate-400 max-w-xl mx-auto" style="line-height:1.75;">Not sure what you need? Every service below includes a free estimate. Just pick the one that fits and book — we'll handle the rest.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Residential -->
+      <div class="service-card p-7">
+        <div class="icon-ring mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="section-title text-white text-xl mb-2">Residential Electrical</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Everything your home needs — wiring, panels, outlets, lighting, and EV charger installs.</p>
+        <ul class="space-y-2 mb-2">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Panel Upgrades</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Outlet & Switch Installs</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> EV Charger Installation</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Home Rewiring</li>
+        </ul>
+        <a href="#contact" class="book-link" onclick="prefillService('Residential Electrical')">
+          Book This Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Commercial -->
+      <div class="service-card p-7" style="border-color: rgba(245,168,0,0.25);">
+        <div class="flex items-center justify-between mb-5">
+          <div class="icon-ring">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+          </div>
+          <span style="background:rgba(245,168,0,0.15); color:#F5A800; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:4px 10px; border-radius:50px; border: 1px solid rgba(245,168,0,0.3);">Popular</span>
+        </div>
+        <h3 class="section-title text-white text-xl mb-2">Commercial Electrical</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Tenant improvements, power distribution, lighting retrofits, and full commercial buildouts.</p>
+        <ul class="space-y-2 mb-2">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Tenant Improvements</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Lighting Retrofits</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Power Distribution</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Code Compliance</li>
+        </ul>
+        <a href="#contact" class="book-link" onclick="prefillService('Commercial Electrical')">
+          Book This Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Repairs & Troubleshooting -->
+      <div class="service-card p-7">
+        <div class="icon-ring mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3 class="section-title text-white text-xl mb-2">Repairs & Troubleshooting</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Something not working right? We diagnose and fix electrical problems quickly and correctly.</p>
+        <ul class="space-y-2 mb-2">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Outage Troubleshooting</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Tripped Breakers</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Exposed Wiring Repair</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> GFCI & AFCI Issues</li>
+        </ul>
+        <a href="#contact" class="book-link" onclick="prefillService('Repairs & Troubleshooting')">
+          Book This Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Panel Upgrades -->
+      <div class="service-card p-7">
+        <div class="icon-ring mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+        </div>
+        <h3 class="section-title text-white text-xl mb-2">Panel Upgrades</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Outdated panel? We upgrade to modern 200A service to handle today's electrical demands safely.</p>
+        <ul class="space-y-2 mb-2">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> 200A Service Upgrades</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Sub-Panel Installs</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Breaker Replacement</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Permit & Inspection</li>
+        </ul>
+        <a href="#contact" class="book-link" onclick="prefillService('Panel Upgrade')">
+          Book This Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Lighting -->
+      <div class="service-card p-7">
+        <div class="icon-ring mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0018 8 6 6 0 006 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 018.91 14"/></svg>
+        </div>
+        <h3 class="section-title text-white text-xl mb-2">Lighting Design & Install</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Interior and exterior lighting installs — LED retrofits, landscape lighting, and smart controls.</p>
+        <ul class="space-y-2 mb-2">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> LED Retrofits</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Recessed Lighting</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Outdoor & Security Lights</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Smart Dimmer Controls</li>
+        </ul>
+        <a href="#contact" class="book-link" onclick="prefillService('Lighting Design & Install')">
+          Book This Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <!-- Inspections -->
+      <div class="service-card p-7">
+        <div class="icon-ring mb-5">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <h3 class="section-title text-white text-xl mb-2">Inspections & Permits</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Electrical inspections, code compliance reviews, and permit filing handled start to finish.</p>
+        <ul class="space-y-2 mb-2">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Home Sale Inspections</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Code Violation Repairs</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Permit Filing</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><svg width="13" height="13" viewBox="0 0 24 24" fill="#F5A800"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Final Sign-Off</li>
+        </ul>
+        <a href="#contact" class="book-link" onclick="prefillService('Inspections & Permits')">
+          Book This Service
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════════════════════
+     RECENT WORK GALLERY
+════════════════════════════════════════════════════════ -->
+<section id="work" class="py-24 lg:py-32" style="background: linear-gradient(180deg, #060E1C 0%, #0B1628 100%);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="text-center mb-14">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="gold-line"></span>
+        <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">Portfolio</span>
+        <span class="gold-line"></span>
+      </div>
+      <h2 class="section-title text-white" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom:0.75rem;">Recent Work</h2>
+      <p class="text-slate-400 max-w-lg mx-auto" style="line-height:1.75;">A look at some of the residential and commercial jobs we've completed recently.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="work-card">
+        <img src="https://placehold.co/600x450/0F1F3D/F5A800?text=200A+Panel+Upgrade" alt="200A Panel Upgrade" />
+        <div class="overlay"></div>
+        <span class="tag">Panel Upgrade</span>
+      </div>
+
+      <div class="work-card">
+        <img src="https://placehold.co/600x450/152A52/FFD166?text=Commercial+Office+Buildout" alt="Commercial Office Buildout" />
+        <div class="overlay"></div>
+        <span class="tag">Commercial</span>
+      </div>
+
+      <div class="work-card">
+        <img src="https://placehold.co/600x450/1A3567/F5A800?text=LED+Recessed+Lighting" alt="LED Recessed Lighting" />
+        <div class="overlay"></div>
+        <span class="tag">Lighting Install</span>
+      </div>
+
+      <div class="work-card">
+        <img src="https://placehold.co/600x450/0F1F3D/FFC033?text=EV+Charger+Install" alt="EV Charger Install" />
+        <div class="overlay"></div>
+        <span class="tag">EV Charger</span>
+      </div>
+
+      <div class="work-card">
+        <img src="https://placehold.co/600x450/152A52/F5A800?text=Outdoor+Security+Lighting" alt="Outdoor Security Lighting" />
+        <div class="overlay"></div>
+        <span class="tag">Outdoor Lighting</span>
+      </div>
+
+      <div class="work-card">
+        <img src="https://placehold.co/600x450/1A3567/FFD166?text=Sub-Panel+%2B+Rewire" alt="Sub-Panel and Rewire" />
+        <div class="overlay"></div>
+        <span class="tag">Residential Rewire</span>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="#contact" class="btn-outline">Get a Free Quote on Your Project</a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════════════════════
+     ABOUT / WHY US
+════════════════════════════════════════════════════════ -->
+<section id="why-us" class="py-24 lg:py-32" style="background: linear-gradient(180deg, #0B1628 0%, #060E1C 100%);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Image -->
+      <div class="relative">
+        <div class="rounded-2xl overflow-hidden" style="box-shadow: 0 24px 64px rgba(0,0,0,0.5);">
+          <img src="https://placehold.co/640x560/0F1F3D/F5A800?text=Commercial+Wiring+Project" alt="JC Electric team on a job" class="w-full h-full object-cover" style="min-height:360px;" />
+          <div class="absolute inset-0 rounded-2xl" style="background:linear-gradient(to bottom right, rgba(26,53,103,0.25), rgba(6,14,28,0.45)); mix-blend-mode:multiply; pointer-events:none;"></div>
+        </div>
+        <!-- Decorative badge — replaced 15+ with 500+ -->
+        <div class="absolute -bottom-6 -right-6 stat-card p-5 text-center" style="box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
+          <p class="section-title" style="font-size:2.5rem; color:#F5A800; line-height:1;">500+</p>
+          <p class="text-slate-400 text-sm">Jobs<br/>Completed</p>
+        </div>
+      </div>
+
+      <!-- Right: Copy -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="gold-line"></span>
+          <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">About JC Electric</span>
+        </div>
+        <h2 class="section-title text-white mb-5" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">Your Local Electrical Experts — Done Right, Every Time</h2>
+        <p class="text-slate-400 mb-5" style="line-height:1.75;">JC Electric is a locally owned and operated electrical contracting company serving residential and commercial clients. We hold all required licenses and insurance, and stand behind every project we complete.</p>
+        <p class="text-slate-400 mb-8" style="line-height:1.75;">We believe in upfront pricing, clean job sites, and craftsmanship that passes every inspection the first time. No shortcuts. No surprises.</p>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="why-card p-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <p class="text-white font-semibold text-sm mb-1">Fully Licensed</p>
+            <p class="text-slate-500 text-xs leading-relaxed">State-licensed master electricians on every job.</p>
+          </div>
+          <div class="why-card p-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <p class="text-white font-semibold text-sm mb-1">On-Time Always</p>
+            <p class="text-slate-500 text-xs leading-relaxed">We respect your schedule and show up when promised.</p>
+          </div>
+          <div class="why-card p-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            <p class="text-white font-semibold text-sm mb-1">Upfront Pricing</p>
+            <p class="text-slate-500 text-xs leading-relaxed">No hidden fees. Free estimates before work begins.</p>
+          </div>
+          <div class="why-card p-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><polyline points="20 6 9 17 4 12"/></svg>
+            <p class="text-white font-semibold text-sm mb-1">Guaranteed Work</p>
+            <p class="text-slate-500 text-xs leading-relaxed">All work warranted and built to pass inspection.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════════════════ -->
+<section id="testimonials" class="py-24 lg:py-32" style="background: linear-gradient(180deg, #060E1C 0%, #0B1628 100%);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="gold-line"></span>
+        <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">Customer Reviews</span>
+        <span class="gold-line"></span>
+      </div>
+      <h2 class="section-title text-white" style="font-size: clamp(2rem, 4vw, 3rem);">What Our Clients Say</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div class="testimonial-card p-7">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-5">"JC Electric did our full panel upgrade and rewire. They were professional, fast, and the work passed inspection first try. 10/10 would recommend."</p>
+        <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.07);">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold" style="background:rgba(245,168,0,0.2); color:#F5A800;">M</div>
+          <div>
+            <p class="text-white text-sm font-semibold">Mark T.</p>
+            <p class="text-slate-500 text-xs">Homeowner, Panel Upgrade</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card p-7">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-5">"We hired JC Electric for our office buildout. They handled everything from rough-in to final walk-through. Clean, organized, and on budget."</p>
+        <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.07);">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold" style="background:rgba(245,168,0,0.2); color:#F5A800;">S</div>
+          <div>
+            <p class="text-white text-sm font-semibold">Sarah L.</p>
+            <p class="text-slate-500 text-xs">Business Owner, Commercial</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card p-7">
+        <div class="flex gap-1 mb-4">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#F5A800"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-5">"Had a wiring issue that was making our lights flicker. JC Electric came out, diagnosed it the same week, and had it fixed quickly. Clean work, fair price."</p>
+        <div class="flex items-center gap-3 pt-4" style="border-top:1px solid rgba(255,255,255,0.07);">
+          <div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold" style="background:rgba(245,168,0,0.2); color:#F5A800;">R</div>
+          <div>
+            <p class="text-white text-sm font-semibold">Robert K.</p>
+            <p class="text-slate-500 text-xs">Homeowner, Electrical Repair</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider" />
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT / BOOKING
+════════════════════════════════════════════════════════ -->
+<section id="contact" class="contact-bg py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+
+      <!-- Left: info -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="gold-line"></span>
+          <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">Book a Service</span>
+        </div>
+        <h2 class="section-title text-white mb-5" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">Request a Free Estimate</h2>
+        <p class="text-slate-400 mb-10" style="line-height:1.75;">Ready to get started? Fill out the form, pick your service, and we'll reach out to confirm a time that works for you.</p>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-4">
+            <div class="icon-ring flex-shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Call / Text Us</p>
+              <a href="tel:+19492965063" class="text-white font-semibold transition-colors duration-200" style="font-size:1.125rem;">(949) 296-5063</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="icon-ring flex-shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Email Us</p>
+              <a href="mailto:info@jcelectric.com" class="text-white font-semibold transition-colors duration-200" style="font-size:1.125rem;">info@jcelectric.com</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="icon-ring flex-shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Business Hours</p>
+              <p class="text-white font-semibold" style="font-size:1.0625rem;">Mon – Fri &nbsp;8:00 AM – 5:00 PM</p>
+              <p class="text-slate-500 text-sm mt-0.5">Closed Saturday & Sunday</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="icon-ring flex-shrink-0">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Service Area</p>
+              <p class="text-white font-semibold" style="font-size:1.0625rem;">Orange County & Surrounding Areas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="testimonial-card p-8">
+        <h3 class="section-title text-white text-2xl mb-2">Schedule a Service</h3>
+        <p class="text-slate-400 text-sm mb-6">We'll confirm your appointment within one business day.</p>
+        <form onsubmit="handleSubmit(event)">
+          <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">First Name</label>
+              <input type="text" placeholder="John" class="form-input" required />
+            </div>
+            <div>
+              <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Last Name</label>
+              <input type="text" placeholder="Smith" class="form-input" required />
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Phone Number</label>
+            <input type="tel" placeholder="(555) 555-0000" class="form-input" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Email Address</label>
+            <input type="email" placeholder="you@email.com" class="form-input" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Service Needed</label>
+            <select id="service-select" class="form-input" style="appearance:none;">
+              <option value="" style="background:#0B1628;">Select a service…</option>
+              <option value="Residential Electrical" style="background:#0B1628;">Residential Electrical</option>
+              <option value="Commercial Electrical" style="background:#0B1628;">Commercial Electrical</option>
+              <option value="Repairs & Troubleshooting" style="background:#0B1628;">Repairs & Troubleshooting</option>
+              <option value="Panel Upgrade" style="background:#0B1628;">Panel Upgrade</option>
+              <option value="Lighting Design & Install" style="background:#0B1628;">Lighting Design & Install</option>
+              <option value="Inspections & Permits" style="background:#0B1628;">Inspections & Permits</option>
+              <option value="Other" style="background:#0B1628;">Other / Not Sure</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Preferred Date</label>
+            <input type="date" class="form-input" style="color-scheme: dark;" />
+          </div>
+          <div class="mb-6">
+            <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Additional Details</label>
+            <textarea rows="3" placeholder="Briefly describe your project or issue…" class="form-input" style="resize:vertical;"></textarea>
+          </div>
+          <button type="submit" class="btn-primary w-full justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Request Appointment
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer style="background:#060E1C; border-top: 1px solid rgba(245,168,0,0.12);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-14">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+      <div class="lg:col-span-2">
+        <img src="brand /JC_Electric_Logo.png" alt="JC Electric" class="h-10 w-auto mb-4" />
+        <p class="text-slate-500 text-sm leading-relaxed max-w-sm">Licensed, insured, and locally owned. JC Electric delivers expert electrical contracting for homes and businesses throughout the metro area.</p>
+      </div>
+
+      <div>
+        <h4 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; font-size:0.875rem; color:#F5A800; margin-bottom:1rem;">Services</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#services" class="text-slate-500 text-sm hover:text-slate-300 transition-colors duration-200">Residential Electrical</a></li>
+          <li><a href="#services" class="text-slate-500 text-sm hover:text-slate-300 transition-colors duration-200">Commercial Electrical</a></li>
+          <li><a href="#services" class="text-slate-500 text-sm hover:text-slate-300 transition-colors duration-200">Repairs & Troubleshooting</a></li>
+          <li><a href="#services" class="text-slate-500 text-sm hover:text-slate-300 transition-colors duration-200">Panel Upgrades</a></li>
+          <li><a href="#services" class="text-slate-500 text-sm hover:text-slate-300 transition-colors duration-200">Lighting Design</a></li>
+          <li><a href="#services" class="text-slate-500 text-sm hover:text-slate-300 transition-colors duration-200">Inspections & Permits</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; font-size:0.875rem; color:#F5A800; margin-bottom:1rem;">Contact</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start gap-2 text-slate-500 text-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" class="mt-0.5 flex-shrink-0" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+            <a href="tel:+19492965063" class="hover:text-slate-300 transition-colors">(949) 296-5063</a>
+          </li>
+          <li class="flex items-start gap-2 text-slate-500 text-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" class="mt-0.5 flex-shrink-0" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:info@jcelectric.com" class="hover:text-slate-300 transition-colors">info@jcelectric.com</a>
+          </li>
+          <li class="flex items-start gap-2 text-slate-500 text-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" class="mt-0.5 flex-shrink-0" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg>
+            <span>Orange County & Surrounding Areas</span>
+          </li>
+          <li class="flex items-start gap-2 text-slate-500 text-sm">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" class="mt-0.5 flex-shrink-0" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mon–Fri 8am–5pm<br/>Closed Sat &amp; Sun</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8" style="border-top:1px solid rgba(255,255,255,0.06);">
+      <p class="text-slate-600 text-xs">&copy; 2026 JC Electric. All rights reserved. Licensed & Insured.</p>
+      <p class="text-slate-700 text-xs">Electrical Contractor · Licensed & Bonded</p>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // Mobile menu
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.background = window.scrollY > 40 ? 'rgba(6,14,28,0.97)' : '';
+  }, { passive: true });
+
+  // Pre-fill service from card click
+  function prefillService(val) {
+    setTimeout(() => {
+      const sel = document.getElementById('service-select');
+      if (sel) sel.value = val;
+    }, 400);
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Appointment Requested!';
+    btn.style.background = 'linear-gradient(135deg, #16a34a, #15803d)';
+    setTimeout(() => {
+      btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Request Appointment';
+      btn.style.background = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.style.opacity = '1';
+        el.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.service-card, .why-card, .testimonial-card, .stat-card, .work-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1)';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
