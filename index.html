@@ -303,26 +303,63 @@
       overflow: hidden;
       position: relative;
       cursor: pointer;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0F1F3D, #152A52);
+      border: 1px solid rgba(245,168,0,0.15);
       transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
       box-shadow: 0 4px 20px rgba(0,0,0,0.35);
     }
     .work-card:hover {
       transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,168,0,0.2);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(245,168,0,0.3);
     }
-    .work-card img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+    .work-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+    .work-card:hover img { opacity: 1; }
     .work-card .overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(6,14,28,0.9) 0%, rgba(6,14,28,0.2) 60%, transparent 100%);
+      background: linear-gradient(to top, rgba(6,14,28,0.88) 0%, rgba(6,14,28,0.3) 60%, transparent 100%);
       opacity: 0;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.45s ease;
     }
     .work-card:hover .overlay { opacity: 1; }
+    /* Default centered label */
+    .work-card .work-label {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #F5A800;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .work-card:hover .work-label { opacity: 0; }
+    /* Hover tag — bottom-left */
     .work-card .tag {
       position: absolute;
       bottom: 12px;
       left: 12px;
+      z-index: 3;
       background: rgba(245,168,0,0.15);
       border: 1px solid rgba(245,168,0,0.4);
       color: #F5A800;
@@ -334,7 +371,10 @@
       padding: 4px 10px;
       border-radius: 4px;
       backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
+    .work-card:hover .tag { opacity: 1; }
 
     /* How it works steps */
     .step-num {
@@ -746,8 +786,8 @@
         <p class="text-slate-400 text-sm mt-1">Licensed & Insured</p>
       </div>
       <div>
-        <p class="section-title" style="font-size:2.25rem; color:#F5A800;">24/7</p>
-        <p class="text-slate-400 text-sm mt-1">Emergency Response</p>
+        <p class="section-title" style="font-size:2.25rem; color:#F5A800;">Panel</p>
+        <p class="text-slate-400 text-sm mt-1">Upgrade Specialists</p>
       </div>
       <div>
         <p class="section-title" style="font-size:2.25rem; color:#F5A800;">Free</p>
@@ -966,38 +1006,44 @@
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
 
       <div class="work-card">
-        <img src="https://placehold.co/600x450/0F1F3D/F5A800?text=200A+Panel+Upgrade" alt="200A Panel Upgrade" />
+        <img src="https://placehold.co/600x450/0F1F3D/F5A800?text=Panel+Upgrade" alt="Panel Upgrade" />
         <div class="overlay"></div>
+        <span class="work-label">Panel Upgrade</span>
         <span class="tag">Panel Upgrade</span>
       </div>
 
       <div class="work-card">
         <img src="https://placehold.co/600x450/152A52/FFD166?text=Commercial+Office+Buildout" alt="Commercial Office Buildout" />
         <div class="overlay"></div>
+        <span class="work-label">Commercial Buildout</span>
         <span class="tag">Commercial</span>
       </div>
 
       <div class="work-card">
         <img src="https://placehold.co/600x450/1A3567/F5A800?text=LED+Recessed+Lighting" alt="LED Recessed Lighting" />
         <div class="overlay"></div>
+        <span class="work-label">LED Recessed Lighting</span>
         <span class="tag">Lighting Install</span>
       </div>
 
       <div class="work-card">
         <img src="https://placehold.co/600x450/0F1F3D/FFC033?text=EV+Charger+Install" alt="EV Charger Install" />
         <div class="overlay"></div>
+        <span class="work-label">EV Charger Install</span>
         <span class="tag">EV Charger</span>
       </div>
 
       <div class="work-card">
         <img src="https://placehold.co/600x450/152A52/F5A800?text=Outdoor+Security+Lighting" alt="Outdoor Security Lighting" />
         <div class="overlay"></div>
+        <span class="work-label">Outdoor Security Lighting</span>
         <span class="tag">Outdoor Lighting</span>
       </div>
 
       <div class="work-card">
         <img src="https://placehold.co/600x450/1A3567/FFD166?text=Sub-Panel+%2B+Rewire" alt="Sub-Panel and Rewire" />
         <div class="overlay"></div>
+        <span class="work-label">Sub-Panel &amp; Rewire</span>
         <span class="tag">Residential Rewire</span>
       </div>
 
@@ -1027,8 +1073,8 @@
         </div>
         <!-- Decorative badge — replaced 15+ with 500+ -->
         <div class="absolute -bottom-6 -right-6 stat-card p-5 text-center" style="box-shadow: 0 16px 40px rgba(0,0,0,0.5);">
-          <p class="section-title" style="font-size:2.5rem; color:#F5A800; line-height:1;">24/7</p>
-          <p class="text-slate-400 text-sm">Emergency<br/>Response</p>
+          <p class="section-title" style="font-size:2.5rem; color:#F5A800; line-height:1;">Panel</p>
+          <p class="text-slate-400 text-sm">Upgrade<br/>Specialists</p>
         </div>
       </div>
 
