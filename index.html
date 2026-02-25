@@ -297,6 +297,34 @@
       box-shadow: 0 0 0 3px rgba(245, 168, 0, 0.1);
     }
 
+    /* Photo upload */
+    .upload-zone {
+      width: 100%;
+      background: rgba(11, 22, 40, 0.8);
+      border: 1px dashed rgba(245,168,0,0.3);
+      border-radius: 6px;
+      padding: 18px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .upload-zone:hover { border-color: rgba(245,168,0,0.65); background: rgba(245,168,0,0.04); }
+    .upload-zone.has-file { border-style: solid; border-color: rgba(245,168,0,0.5); }
+    .upload-zone input[type="file"] { display: none; }
+    .upload-icon { flex-shrink: 0; }
+    .upload-text-main { color: #e2e8f0; font-size: 0.875rem; }
+    .upload-text-sub { color: #475569; font-size: 0.75rem; margin-top: 2px; }
+    .upload-preview {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: none;
+    }
+
     /* Gallery */
     .work-card {
       border-radius: 10px;
@@ -322,39 +350,37 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      opacity: 0;
-      transition: opacity 0.45s ease;
+      opacity: 1;
+      transition: opacity 0.45s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1);
     }
-    .work-card:hover img { opacity: 1; }
+    .work-card:hover img { transform: scale(1.05); }
     .work-card .overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(6,14,28,0.88) 0%, rgba(6,14,28,0.3) 60%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.45s ease;
-    }
-    .work-card:hover .overlay { opacity: 1; }
-    /* Default centered label */
-    .work-card .work-label {
-      position: absolute;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #F5A800;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-      white-space: nowrap;
+      background: linear-gradient(to top, rgba(6,14,28,0.82) 0%, rgba(6,14,28,0.25) 55%, transparent 100%);
       opacity: 1;
       transition: opacity 0.3s ease;
-      pointer-events: none;
     }
-    .work-card:hover .work-label { opacity: 0; }
-    /* Hover tag — bottom-left */
+    .work-card:hover .overlay { opacity: 1; background: linear-gradient(to top, rgba(6,14,28,0.92) 0%, rgba(6,14,28,0.45) 65%, transparent 100%); }
+    /* Expand icon on hover */
+    .work-card .expand-icon {
+      position: absolute;
+      z-index: 3;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(6,14,28,0.65);
+      border: 1px solid rgba(245,168,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .work-card:hover .expand-icon { opacity: 1; }
+    /* Tag — bottom-left, always visible */
     .work-card .tag {
       position: absolute;
       bottom: 12px;
@@ -371,10 +397,114 @@
       padding: 4px 10px;
       border-radius: 4px;
       backdrop-filter: blur(8px);
+      opacity: 1;
+      transition: border-color 0.25s ease, background 0.25s ease;
+    }
+    .work-card:hover .tag { border-color: rgba(245,168,0,0.75); background: rgba(245,168,0,0.22); }
+    /* Title — bottom, fades in on hover */
+    .work-card .work-title {
+      position: absolute;
+      bottom: 38px;
+      left: 12px;
+      right: 12px;
+      z-index: 3;
+      color: #e2e8f0;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
       opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1);
+      pointer-events: none;
+    }
+    .work-card:hover .work-title { opacity: 1; transform: translateY(0); }
+    /* Filter buttons */
+    .filter-btn {
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(15,31,61,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #94a3b8;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+    .filter-btn:hover { color: #F5A800; border-color: rgba(245,168,0,0.3); }
+    .filter-btn.active { background: rgba(245,168,0,0.12); border-color: rgba(245,168,0,0.5); color: #F5A800; }
+    .filter-btn:active { transform: scale(0.97); }
+    .filter-btn:focus-visible { outline: 2px solid #F5A800; outline-offset: 2px; }
+    .work-card.gallery-hidden { display: none; }
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(4,8,15,0.97);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
       transition: opacity 0.3s ease;
     }
-    .work-card:hover .tag { opacity: 1; }
+    #lightbox.open { opacity: 1; pointer-events: all; }
+    #lightbox .lb-img-wrap {
+      max-width: min(900px, 90vw);
+      max-height: 80vh;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 0 1px rgba(245,168,0,0.2);
+    }
+    #lightbox img {
+      display: block;
+      width: 100%;
+      max-height: 78vh;
+      object-fit: contain;
+    }
+    #lb-close {
+      position: fixed; top: 20px; right: 20px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(15,31,61,0.85); border: 1px solid rgba(245,168,0,0.35);
+      color: #F5A800; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+      z-index: 10000;
+    }
+    #lb-close:hover { background: rgba(245,168,0,0.15); border-color: rgba(245,168,0,0.7); }
+    #lb-close:active { transform: scale(0.93); }
+    #lb-prev, #lb-next {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(15,31,61,0.85); border: 1px solid rgba(245,168,0,0.3);
+      color: #F5A800; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+      z-index: 10000;
+    }
+    #lb-prev { left: 16px; }
+    #lb-next { right: 16px; }
+    #lb-prev:hover, #lb-next:hover { background: rgba(245,168,0,0.15); border-color: rgba(245,168,0,0.7); transform: translateY(-50%) scale(1.08); }
+    #lb-close:focus-visible, #lb-prev:focus-visible, #lb-next:focus-visible { outline: 2px solid #F5A800; outline-offset: 2px; }
+    #lb-caption {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      color: #e2e8f0; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      background: rgba(6,14,28,0.85); padding: 7px 20px; border-radius: 50px;
+      border: 1px solid rgba(245,168,0,0.2); white-space: nowrap; z-index: 10000;
+    }
+    #lb-counter {
+      position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
+      color: #94a3b8; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; z-index: 10000;
+    }
 
     /* How it works steps */
     .step-num {
@@ -993,63 +1123,104 @@
 <section id="work" class="py-24 lg:py-32" style="background: linear-gradient(180deg, #060E1C 0%, #0B1628 100%);">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
 
-    <div class="text-center mb-14">
+    <div class="text-center mb-10">
       <div class="flex items-center justify-center gap-3 mb-4">
         <span class="gold-line"></span>
         <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">Portfolio</span>
         <span class="gold-line"></span>
       </div>
-      <h2 class="section-title text-white" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom:0.75rem;">Recent Work</h2>
-      <p class="text-slate-400 max-w-lg mx-auto" style="line-height:1.75;">A look at some of the residential and commercial jobs we've completed recently.</p>
+      <h2 class="section-title text-white" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom:0.75rem;">Our Work</h2>
+      <p class="text-slate-400 max-w-lg mx-auto" style="line-height:1.75;">Real jobs. Real results. A look at residential and commercial projects we've completed across Orange County.</p>
     </div>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <!-- Category filters -->
+    <div class="flex flex-wrap gap-2 justify-center mb-10">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="residential">Residential</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+      <button class="filter-btn" data-filter="lighting">Lighting</button>
+      <button class="filter-btn" data-filter="ev">EV / Solar</button>
+    </div>
 
-      <div class="work-card">
-        <img src="https://placehold.co/600x450/0F1F3D/F5A800?text=Panel+Upgrade" alt="Panel Upgrade" />
+    <!-- Gallery grid — click any photo to open lightbox -->
+    <!-- To use your own photos: add image files to a work_photos/ folder and update the src attributes below -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="work-grid">
+
+      <div class="work-card" data-category="residential" data-title="Panel Upgrade — Irvine">
+        <img src="https://picsum.photos/seed/jce-panel/600/450" alt="200A Panel Upgrade in Irvine" loading="lazy" />
         <div class="overlay"></div>
-        <span class="work-label">Panel Upgrade</span>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Panel Upgrade — Irvine</span>
         <span class="tag">Panel Upgrade</span>
       </div>
 
-      <div class="work-card">
-        <img src="https://placehold.co/600x450/152A52/FFD166?text=Commercial+Office+Buildout" alt="Commercial Office Buildout" />
+      <div class="work-card" data-category="commercial" data-title="Office Buildout — Tustin">
+        <img src="https://picsum.photos/seed/jce-office/600/450" alt="Commercial Office Buildout in Tustin" loading="lazy" />
         <div class="overlay"></div>
-        <span class="work-label">Commercial Buildout</span>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Office Buildout — Tustin</span>
         <span class="tag">Commercial</span>
       </div>
 
-      <div class="work-card">
-        <img src="https://placehold.co/600x450/1A3567/F5A800?text=LED+Recessed+Lighting" alt="LED Recessed Lighting" />
+      <div class="work-card" data-category="lighting" data-title="LED Recessed Lighting">
+        <img src="https://picsum.photos/seed/jce-led/600/450" alt="LED Recessed Lighting Install" loading="lazy" />
         <div class="overlay"></div>
-        <span class="work-label">LED Recessed Lighting</span>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">LED Recessed Lighting</span>
         <span class="tag">Lighting Install</span>
       </div>
 
-      <div class="work-card">
-        <img src="https://placehold.co/600x450/0F1F3D/FFC033?text=EV+Charger+Install" alt="EV Charger Install" />
+      <div class="work-card" data-category="ev" data-title="EV Charger — Newport Beach">
+        <img src="https://picsum.photos/seed/jce-ev/600/450" alt="EV Charger Installation in Newport Beach" loading="lazy" />
         <div class="overlay"></div>
-        <span class="work-label">EV Charger Install</span>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">EV Charger — Newport Beach</span>
         <span class="tag">EV Charger</span>
       </div>
 
-      <div class="work-card">
-        <img src="https://placehold.co/600x450/152A52/F5A800?text=Outdoor+Security+Lighting" alt="Outdoor Security Lighting" />
+      <div class="work-card" data-category="lighting" data-title="Outdoor Security Lighting">
+        <img src="https://picsum.photos/seed/jce-outdoor/600/450" alt="Outdoor Security Lighting Install" loading="lazy" />
         <div class="overlay"></div>
-        <span class="work-label">Outdoor Security Lighting</span>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Outdoor Security Lighting</span>
         <span class="tag">Outdoor Lighting</span>
       </div>
 
-      <div class="work-card">
-        <img src="https://placehold.co/600x450/1A3567/FFD166?text=Sub-Panel+%2B+Rewire" alt="Sub-Panel and Rewire" />
+      <div class="work-card" data-category="residential" data-title="Sub-Panel & Rewire — Anaheim">
+        <img src="https://picsum.photos/seed/jce-rewire/600/450" alt="Sub-Panel and Rewire in Anaheim" loading="lazy" />
         <div class="overlay"></div>
-        <span class="work-label">Sub-Panel &amp; Rewire</span>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Sub-Panel &amp; Rewire — Anaheim</span>
         <span class="tag">Residential Rewire</span>
+      </div>
+
+      <div class="work-card" data-category="residential" data-title="Service Entrance Upgrade">
+        <img src="https://picsum.photos/seed/jce-service/600/450" alt="Service Entrance Upgrade" loading="lazy" />
+        <div class="overlay"></div>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Service Entrance Upgrade</span>
+        <span class="tag">Service Upgrade</span>
+      </div>
+
+      <div class="work-card" data-category="commercial" data-title="Retail Store Buildout">
+        <img src="https://picsum.photos/seed/jce-retail/600/450" alt="Retail Store Electrical Buildout" loading="lazy" />
+        <div class="overlay"></div>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Retail Store Buildout</span>
+        <span class="tag">Commercial</span>
+      </div>
+
+      <div class="work-card" data-category="residential" data-title="Pool & Spa Electrical">
+        <img src="https://picsum.photos/seed/jce-pool/600/450" alt="Pool and Spa Electrical Work" loading="lazy" />
+        <div class="overlay"></div>
+        <span class="expand-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+        <span class="work-title">Pool &amp; Spa Electrical</span>
+        <span class="tag">Pool Electrical</span>
       </div>
 
     </div>
 
-    <div class="text-center mt-10">
+    <div class="text-center mt-12">
       <a href="#contact" class="btn-outline">Get a Free Quote on Your Project</a>
     </div>
   </div>
@@ -1293,9 +1464,23 @@
             <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Preferred Date</label>
             <input type="date" name="preferred_date" class="form-input" style="color-scheme: dark;" />
           </div>
-          <div class="mb-6">
+          <div class="mb-4">
             <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Additional Details</label>
             <textarea rows="3" name="message" placeholder="Briefly describe your project or issue…" class="form-input" style="resize:vertical;"></textarea>
+          </div>
+          <div class="mb-6">
+            <label class="block text-slate-400 text-xs uppercase tracking-widest mb-2">Attach a Photo <span style="color:#475569; font-size:0.7rem; letter-spacing:0;">(optional)</span></label>
+            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('photoInput').click()">
+              <input type="file" id="photoInput" name="photo" accept="image/*">
+              <img class="upload-preview" id="uploadPreview" alt="Preview" />
+              <div class="upload-icon" id="uploadIcon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              </div>
+              <div>
+                <p class="upload-text-main" id="uploadTextMain">Click to attach a photo</p>
+                <p class="upload-text-sub">JPG, PNG, HEIC up to 10MB</p>
+              </div>
+            </div>
           </div>
           <button type="submit" class="btn-primary w-full justify-center">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -1364,6 +1549,27 @@
 </footer>
 
 
+<!-- ═══════════════════════════════════════════════════════
+     LIGHTBOX
+════════════════════════════════════════════════════════ -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button id="lb-close" aria-label="Close photo viewer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button id="lb-prev" aria-label="Previous photo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="lb-img-wrap">
+    <img id="lb-img" src="" alt="" />
+  </div>
+  <button id="lb-next" aria-label="Next photo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div id="lb-caption"></div>
+  <div id="lb-counter"></div>
+</div>
+
+
 <script>
   // Mobile menu
   const menuBtn = document.getElementById('menu-btn');
@@ -1384,6 +1590,26 @@
       if (sel) sel.value = val;
     }, 400);
   }
+
+  // Photo upload preview
+  document.getElementById('photoInput').addEventListener('change', function() {
+    const file = this.files[0];
+    const zone = document.getElementById('uploadZone');
+    const preview = document.getElementById('uploadPreview');
+    const icon = document.getElementById('uploadIcon');
+    const label = document.getElementById('uploadTextMain');
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        icon.style.display = 'none';
+        label.textContent = file.name;
+        zone.classList.add('has-file');
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
   // Form submit — sends to Formspree → info@jcelectricsocal.com
   async function handleSubmit(e) {
@@ -1431,6 +1657,85 @@
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s cubic-bezier(0.22,1,0.36,1), transform 0.6s cubic-bezier(0.22,1,0.36,1)';
     observer.observe(el);
+  });
+
+  // ─── Gallery Filter ───────────────────────────────────────────
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('#work-grid .work-card').forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('gallery-hidden', !match);
+      });
+    });
+  });
+
+  // ─── Lightbox ─────────────────────────────────────────────────
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbCounter = document.getElementById('lb-counter');
+  let lbIndex = 0;
+
+  function getVisibleCards() {
+    return [...document.querySelectorAll('#work-grid .work-card:not(.gallery-hidden)')];
+  }
+
+  function openLightbox(cards, index) {
+    lbIndex = index;
+    showLbPhoto(cards);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lb-close').focus();
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showLbPhoto(cards) {
+    const cards_ = cards || getVisibleCards();
+    const card = cards_[lbIndex];
+    const img = card.querySelector('img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCaption.textContent = card.dataset.title || card.querySelector('.tag')?.textContent || '';
+    lbCounter.textContent = (lbIndex + 1) + ' / ' + cards_.length;
+  }
+
+  document.querySelectorAll('#work-grid .work-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const visible = getVisibleCards();
+      const idx = visible.indexOf(card);
+      if (idx !== -1) openLightbox(visible, idx);
+    });
+  });
+
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+
+  document.getElementById('lb-prev').addEventListener('click', () => {
+    const visible = getVisibleCards();
+    lbIndex = (lbIndex - 1 + visible.length) % visible.length;
+    showLbPhoto(visible);
+  });
+
+  document.getElementById('lb-next').addEventListener('click', () => {
+    const visible = getVisibleCards();
+    lbIndex = (lbIndex + 1) % visible.length;
+    showLbPhoto(visible);
+  });
+
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { const v = getVisibleCards(); lbIndex = (lbIndex - 1 + v.length) % v.length; showLbPhoto(v); }
+    if (e.key === 'ArrowRight') { const v = getVisibleCards(); lbIndex = (lbIndex + 1) % v.length; showLbPhoto(v); }
   });
 </script>
 
