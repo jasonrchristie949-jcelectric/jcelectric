@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invoice — JC Electric</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff;padding:24px}
+    .invoice{max-width:700px;margin:0 auto;border:1px solid #e6e6e6;padding:20px}
+    .brand{color:#F5A800;font-weight:700;font-size:1.25rem}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+    .right{text-align:right}
+    .total{font-weight:700}
+    .small{font-size:0.85rem;color:#666}
+  </style>
+</head>
+<body>
+  <div class="invoice">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div class="brand">JC Electric</div>
+        <div class="small">Fountain Valley, CA | (949) 296-5063 | https://jcelectric.com</div>
+      </div>
+      <div style="text-align:right">
+        <div>Invoice #: <strong>{{INVOICE_NUMBER}}</strong></div>
+        <div>Date: {{DATE}}</div>
+        <div>Due: {{DUE_DATE}}</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <div><strong>BILL TO:</strong> {{CUSTOMER_NAME}}</div>
+      <div class="small">{{CUSTOMER_ADDRESS}}</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>Qty</th><th>Description</th><th class="right">Unit</th><th class="right">Line Total</th></tr>
+      </thead>
+      <tbody>
+        <!-- ITEMS -->
+        <tr><td>1</td><td>EV Charger (hardware)</td><td class="right">$600.00</td><td class="right">$600.00</td></tr>
+        <tr><td>1</td><td>EV Charger installation</td><td class="right">$750.00</td><td class="right">$750.00</td></tr>
+        <tr><td>8</td><td>Recessed lights</td><td class="right">$120.00</td><td class="right">$960.00</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><td></td><td class="right">Subtotal</td><td></td><td class="right">$2,310.00</td></tr>
+        <tr><td></td><td class="right">Sales Tax</td><td></td><td class="right">$0.00</td></tr>
+        <tr><td></td><td class="right total">Total Due</td><td></td><td class="right total">$2,310.00</td></tr>
+      </tfoot>
+    </table>
+
+    <div style="margin-top:18px" class="small">
+      Payment terms: Deposit of {{DEPOSIT_PERCENT}}% required to schedule. Balance due within 7 days of completion. Late fee: 1.5% per month on overdue balances.
+    </div>
+
+    <div style="margin-top:18px">
+      <strong>Payment methods:</strong> Check, ACH, credit card (3% fee), Venmo (business). Please reference Invoice #{{INVOICE_NUMBER}} when paying.
+    </div>
+
+  </div>
+</body>
+</html>
