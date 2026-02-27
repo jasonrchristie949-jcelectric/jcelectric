@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JC Electric — Estimate</title>
+  <style>
+    :root{--gold:#F5A800;--bg:#ffffff;--text:#111}
+    body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg);padding:28px}
+    .container{max-width:800px;margin:0 auto;border:1px solid #e6e6e6;padding:22px}
+    header{display:flex;justify-content:space-between;align-items:center}
+    .brand{color:var(--gold);font-weight:800;font-size:1.4rem}
+    .meta{font-size:0.9rem;text-align:right}
+    h2{margin:18px 0 8px}
+    table{width:100%;border-collapse:collapse;margin-top:16px}
+    th,td{border:1px solid #eee;padding:8px;text-align:left}
+    th{background:#fafafa}
+    .right{text-align:right}
+    .total{font-weight:700}
+    footer{margin-top:20px;font-size:0.9rem;color:#444}
+    .notes{background:#fafafa;padding:10px;border-radius:6px;margin-top:12px}
+    @media print{
+      body{padding:0}
+      .container{border:none;box-shadow:none}
+      a.print-hide{display:none}
+    }
+    .btn{display:inline-block;background:var(--gold);color:#06101A;padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <div class="brand">JC Electric</div>
+        <div class="small">Fountain Valley, CA | (949) 296-5063 | https://jcelectric.com</div>
+      </div>
+      <div class="meta">
+        <div>Estimate #: <strong>{{ESTIMATE_NUMBER}}</strong></div>
+        <div>Date: {{DATE}}</div>
+        <div>Expires: {{EXPIRATION_DATE}}</div>
+      </div>
+    </header>
+
+    <h2>Estimate For</h2>
+    <div>
+      <strong>{{CUSTOMER_NAME}}</strong><br />
+      {{CUSTOMER_ADDRESS}}<br />
+      {{CUSTOMER_PHONE_EMAIL}}
+    </div>
+
+    <h2>Project Summary</h2>
+    <div class="notes">{{SHORT_PROJECT_DESCRIPTION}}</div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:8%">Qty</th>
+          <th>Description</th>
+          <th style="width:18%">Unit Price</th>
+          <th style="width:18%">Line Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example rows: copy or replace -->
+        <tr>
+          <td>1</td>
+          <td>EV Charger (hardware)</td>
+          <td class="right">$600.00</td>
+          <td class="right">$600.00</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>EV Charger installation (typical, no panel work)</td>
+          <td class="right">$750.00</td>
+          <td class="right">$750.00</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Panel Upgrade (100A→200A, typical)</td>
+          <td class="right">$4,200.00</td>
+          <td class="right">$4,200.00</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="right">Subtotal</td>
+          <td class="right">$5,550.00</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="right">Permit & Fees</td>
+          <td class="right">$150.00</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="right">Deposit (30%)</td>
+          <td class="right">$1,690.50</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="right total">Balance Due</td>
+          <td class="right total">$4,009.50</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="notes" style="margin-top:12px">
+      <strong>Payment Terms:</strong> Deposit required to schedule (commonly 30% for larger projects). Remaining balance due within 7 days of completion. Late fee: 1.5% per month after 30 days. Accepted payments: check, ACH, credit card (3% fee), Venmo (business).
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+      <div style="max-width:60%">
+        <strong>Notes & Assumptions</strong>
+        <ul style="margin:6px 0 0 18px;color:#444">
+          <li>Estimate valid for 30 days.</li>
+          <li>Assumes standard residential access and no hidden conditions.</li>
+          <li>Change orders will be issued for additional work discovered during the job.</li>
+        </ul>
+      </div>
+      <div style="text-align:right">
+        <div style="margin-bottom:14px">Prepared by: <strong>{{PREPARER_NAME}}</strong></div>
+        <div style="border-top:1px solid #eee;padding-top:8px">Customer signature: ______________________</div>
+      </div>
+    </div>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:18px">
+        <div class="small">JC Electric • C10 # • Registered Service Agent #36324</div>
+        <div>
+          <a href="#" class="btn print-hide" onclick="window.print();return false">Print / Save as PDF</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Instructions: Open this file in a browser, fill placeholders (or edit the HTML), then use Print -> Save as PDF to create a PDF you can email. -->
+</body>
+</html>
