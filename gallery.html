@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>JC Electric — Project Gallery</title>
+  <link rel="stylesheet" href="index.html">
+  <style>
+    body{font-family:Inter, sans-serif;background:#0B1628;color:#e2e8f0;padding:36px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:linear-gradient(145deg, rgba(15,31,61,0.6), rgba(6,14,28,0.6));padding:8px;border-radius:10px;border:1px solid rgba(245,168,0,0.06)}
+    img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+    .caption{font-size:0.875rem;color:#cbd5e1;margin-top:6px}
+  </style>
+</head>
+<body>
+  <header style="max-width:1100px;margin:0 auto 24px;">
+    <h1 style="color:#F5A800;margin:0 0 8px;">Project Gallery</h1>
+    <p style="color:#94a3b8;margin:0 0 16px;">Real jobs — before & afters from across Orange County. Click any image to open full size.</p>
+  </header>
+
+  <main style="max-width:1100px;margin:0 auto;">
+    <div class="grid">
+      <!-- IMAGES_INSERT -->
+      <!-- gallery images pulled from _gallery_images.html -->
+      <!-- (auto-generated) -->
+      <!-- start -->
+      <!-- include: _gallery_images.html -->
+    </div>
+  </main>
+
+  <script>
+    // Lightbox
+    document.addEventListener('click', function(e){
+      if(e.target.tagName === 'IMG' && e.target.dataset.full){
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed'; overlay.style.inset = 0; overlay.style.background = 'rgba(0,0,0,0.85)'; overlay.style.display = 'flex'; overlay.style.alignItems = 'center'; overlay.style.justifyContent = 'center'; overlay.style.zIndex = 9999;
+        const img = document.createElement('img'); img.src = e.target.dataset.full; img.style.maxWidth = '95%'; img.style.maxHeight = '95%'; img.style.boxShadow = '0 24px 64px rgba(0,0,0,0.6)'; overlay.appendChild(img);
+        overlay.addEventListener('click', ()=> overlay.remove());
+        document.body.appendChild(overlay);
+      }
+    });
+  </script>
+</body>
+</html>
