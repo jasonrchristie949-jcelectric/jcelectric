@@ -1,17 +1,346 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Electrician in Costa Mesa — JC Electric</title>
-  <meta name="description" content="JC Electric provides electrical services in Costa Mesa, CA — retail, commercial, and residential electrical work.">
-  <link rel="stylesheet" href="index.html">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Electrician in Costa Mesa — JC Electric | Licensed & Insured</title>
+  <meta name="description" content="Expert electrical contractor serving Costa Mesa, CA. Licensed, insured, and local. Panel upgrades, EV chargers, home rewiring, lighting design, and repairs." />
+  <meta name="keywords" content="electrician Costa Mesa, electrical contractor Costa Mesa, licensed electrician, panel upgrade, EV charger installation" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { 950: '#060E1C', 900: '#0B1628', 800: '#0F1F3D' },
+            gold: { 400: '#FFC033', 500: '#F5A800', 600: '#D98E00' },
+          },
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0B1628; color: #e2e8f0; }
+    
+    .nav-blur {
+      backdrop-filter: blur(16px);
+      background: rgba(6, 14, 28, 0.88);
+      border-bottom: 1px solid rgba(245, 168, 0, 0.15);
+    }
+    
+    .nav-link {
+      position: relative;
+      color: #94a3b8;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #F5A800;
+      transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .nav-link:hover { color: #F5A800; }
+    .nav-link:hover::after { width: 100%; }
+    
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #F5A800, #D98E00);
+      color: #060E1C;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+      box-shadow: 0 4px 16px rgba(245, 168, 0, 0.3);
+      text-decoration: none;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 28px rgba(245, 168, 0, 0.45);
+    }
+    
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+    
+    .gold-line {
+      display: inline-block;
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, #F5A800, #FFD166);
+      border-radius: 2px;
+    }
+  </style>
 </head>
 <body>
-  <main style="font-family:Inter, sans-serif; padding:40px; background:#0B1628; color:#e2e8f0;">
-    <h1 style="color:#F5A800;">Electrician in Costa Mesa</h1>
-    <p>JC Electric serves Costa Mesa offering commercial and residential electrical services, including retail buildouts and maintenance. Licensed and insured.</p>
-    <a href="/index.html#contact" style="display:inline-block;margin-top:18px;padding:12px 18px;background:#F5A800;color:#06101A;border-radius:6px;text-decoration:none;">Request Service</a>
-  </main>
+
+<!-- NAVIGATION -->
+<header class="fixed top-0 left-0 right-0 z-50 nav-blur">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between" style="height:72px;">
+    <a href="/" class="flex-shrink-0 flex flex-col items-start">
+      <img src="brand/JC_Electric_Logo.png" alt="JC Electric" class="h-10 w-auto" />
+      <span class="text-xs text-slate-400 mt-0.5">Licensed & Insured</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="/#services" class="nav-link">Services</a>
+      <a href="/#work" class="nav-link">Portfolio</a>
+      <a href="/#why-us" class="nav-link">About</a>
+      <a href="/#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <div class="hidden md:flex items-center gap-3">
+      <a href="tel:+19492965063" class="flex items-center gap-2 font-semibold text-sm" style="color:#F5A800;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+        (949) 296-5063
+      </a>
+      <a href="#contact" class="btn-primary" style="padding: 10px 22px; font-size:0.875rem;">Get a Free Estimate</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section style="padding-top: 72px; min-height: 70vh; display:flex; align-items:center; background: linear-gradient(180deg, #0F1F3D 0%, #0B1628 100%);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-20 w-full">
+    <div class="max-w-2xl">
+      <div style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem; margin-bottom:0.75rem;">Electrician in Costa Mesa</div>
+      <h1 class="section-title text-white" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem;">
+        Expert Electrical Services for Costa Mesa Homes & Businesses
+      </h1>
+      <p class="text-slate-400 mb-10" style="font-size:1.0625rem; line-height:1.75; max-width:550px;">
+        JC Electric proudly serves the Costa Mesa community with licensed, insured electrical contracting for residential panel upgrades, home rewiring, EV charger installation, lighting design, and repairs. We're local, we're reliable, and we get the job done right.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#contact" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Request Service
+        </a>
+        <a href="/" class="inline-flex items-center gap-2 text-slate-400 hover:text-slate-200 py-3 px-4 transition-colors">
+          View all services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="flex flex-wrap gap-6 mt-12">
+        <div class="flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="text-slate-400 text-sm">Licensed C10</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="text-slate-400 text-sm">Fully Insured</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <span class="text-slate-400 text-sm">Free Estimates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES FOR COSTA MESA -->
+<section style="background: linear-gradient(180deg, #0B1628 0%, #060E1C 100%); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">What We Do in Costa Mesa</span>
+      <h2 class="section-title text-white" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin: 1rem 0;">Residential & Commercial Electrical</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto mb-12">
+      <div style="background: rgba(15, 31, 61, 0.5); border: 1px solid rgba(245,168,0,0.15); border-radius:12px; padding:28px; transition: transform 0.3s ease, border-color 0.25s ease;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(245, 168, 0, 0.1); border: 1px solid rgba(245, 168, 0, 0.25); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3 class="section-title text-white text-lg mb-3">Home & Residential</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Panel upgrades, home rewiring, outlets, lighting, EV charger installation, smart home wiring, and electrical repairs.</p>
+        <a href="/#contact" style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; font-size:0.9rem; text-decoration:none; display:flex; align-items:center; gap:6px;">
+          Get a Free Quote
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div style="background: rgba(15, 31, 61, 0.5); border: 1px solid rgba(245,168,0,0.15); border-radius:12px; padding:28px; transition: transform 0.3s ease, border-color 0.25s ease;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(245, 168, 0, 0.1); border: 1px solid rgba(245, 168, 0, 0.25); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        </div>
+        <h3 class="section-title text-white text-lg mb-3">Business & Commercial</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Tenant improvements, power distribution, lighting retrofits, EV infrastructure, and full commercial buildouts.</p>
+        <a href="/#contact" style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; font-size:0.9rem; text-decoration:none; display:flex; align-items:center; gap:6px;">
+          Get a Free Quote
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div style="text-align:center;">
+      <a href="/#services" class="btn-primary" style="display:inline-flex;">
+        See All Services
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WHY COSTA MESA TRUSTS JC ELECTRIC -->
+<section style="background: linear-gradient(180deg, #060E1C 0%, #0B1628 100%); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem;">Local & Licensed</span>
+      <h2 class="section-title text-white" style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin: 1rem 0;">Why Costa Mesa Chooses JC Electric</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div style="background: rgba(15,31,61,0.5); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:24px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <p class="text-white font-semibold text-sm mb-1">Fully Licensed & Insured</p>
+        <p class="text-slate-500 text-xs leading-relaxed">State-licensed C10 electrical contractor with full insurance coverage.</p>
+      </div>
+
+      <div style="background: rgba(15,31,61,0.5); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:24px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <p class="text-white font-semibold text-sm mb-1">Responsive & On-Time</p>
+        <p class="text-slate-500 text-xs leading-relaxed">We respect your time and show up when promised.</p>
+      </div>
+
+      <div style="background: rgba(15,31,61,0.5); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:24px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <p class="text-white font-semibold text-sm mb-1">Upfront Pricing</p>
+        <p class="text-slate-500 text-xs leading-relaxed">Free estimates. No hidden costs or surprises.</p>
+      </div>
+
+      <div style="background: rgba(15,31,61,0.5); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:24px;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mb-3"><polyline points="20 6 9 17 4 12"/></svg>
+        <p class="text-white font-semibold text-sm mb-1">Warranty & Guarantees</p>
+        <p class="text-slate-500 text-xs leading-relaxed">1-year labor warranty on all work. Built to code.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background: linear-gradient(180deg, #0F1F3D 0%, #0B1628 100%); padding: 80px 0;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div>
+        <span style="color:#F5A800; font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; font-size:0.875rem; display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+          <span class="gold-line"></span> Book a Service in Costa Mesa
+        </span>
+        <h2 class="section-title text-white" style="font-size: clamp(1.5rem, 3vw, 2.25rem); margin-bottom:20px;">Schedule Your Free Estimate</h2>
+        <p class="text-slate-400 mb-12" style="line-height:1.75;">Call us, use the form, or email — we'll get back to you quickly and lock in a time that works for your schedule.</p>
+
+        <div class="space-y-6">
+          <div class="flex items-center gap-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Call / Text</p>
+              <a href="tel:+19492965063" class="text-white font-semibold" style="font-size:1.125rem;">(949) 296-5063</a>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Email</p>
+              <a href="mailto:info@jcelectricsocal.com" class="text-white font-semibold" style="font-size:1.125rem;">info@jcelectricsocal.com</a>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5A800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <p class="text-slate-500 text-xs uppercase tracking-widest mb-1">Hours</p>
+              <p class="text-white font-semibold" style="font-size:1.0625rem;">Mon – Fri 8am – 5pm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: linear-gradient(145deg, rgba(15,31,61,0.7), rgba(11,22,40,0.9)); border: 1px solid rgba(245,168,0,0.1); border-radius: 12px; padding: 32px;">
+        <h3 class="section-title text-white text-2xl mb-2">Request Service</h3>
+        <p class="text-slate-400 text-sm mb-6">We'll confirm your appointment within one business day.</p>
+        <form onsubmit="handleSubmit(event)">
+          <div class="grid sm:grid-cols-2 gap-4 mb-4">
+            <input type="text" name="first_name" placeholder="First Name" style="width:100%; background:rgba(11,22,40,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:12px 16px; color:#e2e8f0; outline:none;" required />
+            <input type="text" name="last_name" placeholder="Last Name" style="width:100%; background:rgba(11,22,40,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:12px 16px; color:#e2e8f0; outline:none;" required />
+          </div>
+          <input type="email" name="email" placeholder="Email" style="width:100%; background:rgba(11,22,40,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:12px 16px; color:#e2e8f0; margin-bottom:16px; outline:none;" required />
+          <input type="tel" name="phone" placeholder="Phone" style="width:100%; background:rgba(11,22,40,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:12px 16px; color:#e2e8f0; margin-bottom:16px; outline:none;" />
+          <textarea name="message" placeholder="Brief description of your project..." rows="3" style="width:100%; background:rgba(11,22,40,0.8); border:1px solid rgba(255,255,255,0.1); border-radius:6px; padding:12px 16px; color:#e2e8f0; margin-bottom:16px; outline:none; resize:vertical;"></textarea>
+          <button type="submit" class="btn-primary w-full justify-center">
+            Request Appointment
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#060E1C; border-top: 1px solid rgba(245,168,0,0.12); padding: 40px 0; text-align:center;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <a href="/" style="display:inline-block; margin-bottom:20px;">
+      <img src="brand/JC_Electric_Logo.png" alt="JC Electric" class="h-10 w-auto" />
+    </a>
+    <p class="text-slate-500 text-sm mb-4">Licensed, insured, and locally owned. Costa Mesa's trusted electrical contractor.</p>
+    <p style="color:#94a3b8; font-size:0.875rem;">&copy; 2026 JC Electric. All rights reserved. C10 Contractor | Licensed & Bonded</p>
+  </div>
+</footer>
+
+<script>
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = 'Sending…';
+    try {
+      const res = await fetch('https://formspree.io/f/xzdayvnz', {
+        method: 'POST',
+        body: new FormData(e.target),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.innerHTML = '✓ Appointment Requested!';
+        e.target.reset();
+        setTimeout(() => {
+          btn.innerHTML = 'Request Appointment';
+          btn.disabled = false;
+        }, 4000);
+      }
+    } catch {
+      btn.innerHTML = 'Error — try again';
+      btn.disabled = false;
+    }
+  }
+</script>
+
 </body>
 </html>
